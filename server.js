@@ -8,8 +8,13 @@ import { URL } from './models/URL.js';
 const app = express();
 
 app.use(express.json());
-app.use(cors());
 dotenv.config();
+
+app.use(cors({
+  origin: ["https://www.linkly.fit"],
+  methods: ["GET", "POST", "OPTIONS"],
+  credentials: true
+}));
 
 connectDB();
 
