@@ -11,10 +11,12 @@ app.use(express.json());
 dotenv.config();
 
 app.use(cors({
-  origin: ["https://www.linkly.fit"],
+  origin: ["https://linkly.fit", "https://www.linkly.fit"],
   methods: ["GET", "POST", "OPTIONS"],
   credentials: true
 }));
+
+app.options("*", cors());
 
 connectDB();
 
