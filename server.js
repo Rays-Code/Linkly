@@ -16,26 +16,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.options("*", cors());
-
 connectDB();
-
-app.get("/:shortURLId", async (req, res) => {
-
-    const isURL = await URL.findOne({ 
-        shortURL: { $regex: req.params.shortURLId }
-    });
-    
-    if(isURL === null){
-        return res.status(404).json({message: "URL not found"});
-    }
-
-    const currentMonth = new Date().getMonth();
-
-    isURL.clicksHistory[currentMonth].clicks++
-    await isURL.save();
-    res.redirect(isURL.longURL);
-})
 
 app.post("/api/shorten", async (req, res) => {
     const { longURL } = req.body;
@@ -90,5 +71,22 @@ app.post("/api/analytics", async (req, res) => {
         clicksHistory: isShortURLExists.clicksHistory
     })   
 });
+
+app.get("/:shortURLId", async (req, res) => {
+
+    const isURL = await URL.findOne({ 
+        shortURL: { $regex: req.params.shortURLId }
+    });
+    
+    if(isURL === null){
+        return res.status(404).json({message: "URL not found"});
+    }
+
+    const currentMonth = new Date().getMonth();
+
+    isURL.clicksHistory[currentMonth].clicks++
+    await isURL.save();
+    res.redirect(isURL.longURL);
+})
 
 app.listen(process.env.PORT || 3000, () => console.log('Server is running...'));
