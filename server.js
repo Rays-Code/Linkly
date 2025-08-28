@@ -91,5 +91,4 @@ app.post("/api/analytics", async (req, res) => {
     })   
 });
 
-module.exports = app;
-// app.listen(process.env.PORT || 3000, () => console.log('Server is running...'));
+app.listen(process.env.PORT || 3000, () => console.log('Server is running...'));
