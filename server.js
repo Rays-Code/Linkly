@@ -11,7 +11,7 @@ app.use(express.json());
 dotenv.config();
 
 app.use(cors({
-  origin: ["https://linkly.fit", "https://www.linkly.fit"],
+  origin: ["https://short.linkly.fit", "https://www.short.linkly.fit"],
   methods: ["GET", "POST", "OPTIONS"],
   credentials: true
 }));
