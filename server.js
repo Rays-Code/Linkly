@@ -54,7 +54,7 @@ app.post("/api/shorten", async (req, res) => {
 });
 
 app.post("/api/analytics", async (req, res) => {
-    const shortURL = 'https://' + req.body.shortURL;
+    const shortURL = 'https://www.' + req.body.shortURL;
 
     if(!shortURL){
         return res.status(400).json({error: "shortURL is required"});
